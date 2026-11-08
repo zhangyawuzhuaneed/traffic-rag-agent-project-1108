@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      # 用 dummy Key：纯单元测试不发起真实 API 调用，但 KeyGuard 要求非空
+      - name: 编译与单元测试
+        env:
+          ZHIPU_API_KEY: ci-dummy-key-not-for-api-calls
+        run: ./mvnw -B -ntp test
+
+      - name: 确认 .env 未被提交
+        run: |
+          if git ls-files --error-unmatch .env >/dev/null 2>&1; then
+            echo "::error::.env 已被跟踪，存在密钥泄露风险"
+            exit 1
+          fi
+          echo "OK: .env 未入库"
+
+      - name: 确认示例配置只有占位符
+        run: |
+          if grep -q 'your_zhipu_api_key_here' .env.example; then
+            echo "OK: .env.example 为占位模板"
+          else
+            echo "::error::.env.example 缺少占位符，请检查"
+            exit 1
+          fi
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # gitleaks 需要完整历史
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

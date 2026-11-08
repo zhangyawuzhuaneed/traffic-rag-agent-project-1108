@@ -1,0 +1,162 @@
+[
+  {
+    "id": "E01",
+    "question": "隧道内 CO 浓度达到 78 ppm 时应当如何处置？",
+    "expectKeywords": ["70 ppm", "关闭隧道入口、限制通行"],
+    "source": "01-emergency-plan.md",
+    "mustRefuse": false,
+    "note": "CO 二级阈值，考察数值分级边界"
+  },
+  {
+    "id": "E02",
+    "question": "CO 浓度升到 100 ppm 以上要采取什么措施？",
+    "expectKeywords": ["100 ppm", "双向全封闭", "应急疏散"],
+    "source": "01-emergency-plan.md",
+    "mustRefuse": false,
+    "note": "危险阈值与 I 级响应"
+  },
+  {
+    "id": "E03",
+    "question": "隧道发生火灾后风机和入口应该怎么操作？",
+    "expectKeywords": ["30 秒内启动全部射流风机全速排烟", "封闭隧道双向入口"],
+    "source": "01-emergency-plan.md",
+    "mustRefuse": false,
+    "note": "火灾处置顺序"
+  },
+  {
+    "id": "E04",
+    "question": "突然停电时 UPS 能撑多久，发电机多久要自启？",
+    "expectKeywords": ["90 分钟", "15 秒内自启"],
+    "source": "01-emergency-plan.md",
+    "mustRefuse": false,
+    "note": "两个时限数字，考察是否混淆"
+  },
+  {
+    "id": "E05",
+    "question": "CO 检测器多久标定一次，允许的误差是多少？",
+    "expectKeywords": ["每 6 个月一次", "±2 ppm"],
+    "source": "02-device-manual.md",
+    "mustRefuse": false,
+    "note": "设备标定周期"
+  },
+  {
+    "id": "E06",
+    "question": "射流风机轴承温度到多少度必须停机？累计运行多久大修？",
+    "expectKeywords": ["80 ℃", "8000 小时"],
+    "source": "02-device-manual.md",
+    "mustRefuse": false,
+    "note": "两个不同量纲的数字"
+  },
+  {
+    "id": "E07",
+    "question": "摄像机录像保存多久，布设密度是多少？",
+    "expectKeywords": ["30 天", "每 150 米一台"],
+    "source": "02-device-manual.md",
+    "mustRefuse": false,
+    "note": "易与检测器 200 米混淆"
+  },
+  {
+    "id": "E08",
+    "question": "情报板指令下发到显示生效允许的最大延时是多少？",
+    "expectKeywords": ["≤ 3 秒"],
+    "source": "02-device-manual.md",
+    "mustRefuse": false,
+    "note": "精确 SLA"
+  },
+  {
+    "id": "E09",
+    "question": "能见度只有 80 米时限速多少，还要做什么？",
+    "expectKeywords": ["40 km/h", "就近驶离高速", "间隔放行"],
+    "source": "03-speed-rules.md",
+    "mustRefuse": false,
+    "note": "能见度分档限速"
+  },
+  {
+    "id": "E10",
+    "question": "能见度 150 米时限速多少，车距和超车有什么要求？",
+    "expectKeywords": ["60 km/h", "保持 100 米以上车距", "禁止超车"],
+    "source": "03-speed-rules.md",
+    "mustRefuse": false,
+    "note": "与 E09 相邻档位，考察是否串档"
+  },
+  {
+    "id": "E11",
+    "question": "危化品车辆什么时间段禁止通行隧道？",
+    "expectKeywords": ["0:00 至 6:00"],
+    "source": "03-speed-rules.md",
+    "mustRefuse": false,
+    "note": "时间段精确引用"
+  },
+  {
+    "id": "E12",
+    "question": "侧风超过 15 m/s 和 20 m/s 分别怎么处理？",
+    "expectKeywords": ["15 m/s", "20 m/s", "限制高箱体车辆"],
+    "source": "03-speed-rules.md",
+    "mustRefuse": false,
+    "note": "两档阈值不能混"
+  },
+  {
+    "id": "E13",
+    "question": "洞内噪声超过多少分贝需要触发通风复核？",
+    "expectKeywords": ["95 dB"],
+    "source": "04-thresholds.md",
+    "mustRefuse": false,
+    "note": "阈值表精确数值"
+  },
+  {
+    "id": "E14",
+    "question": "同一检测器短时间重复告警怎么处理？",
+    "expectKeywords": ["60 秒内的重复告警合并"],
+    "source": "04-thresholds.md",
+    "mustRefuse": false,
+    "note": "告警去重规则"
+  },
+  {
+    "id": "E15",
+    "question": "响应级别升级能不能只靠一个检测器读数？",
+    "expectKeywords": ["相邻两套检测器或人工复核", "禁止单点数据直接触发全封闭"],
+    "source": "04-thresholds.md",
+    "mustRefuse": false,
+    "note": "考察否定型规则是否漏读"
+  },
+  {
+    "id": "E16",
+    "question": "车辆在隧道里抛锚又移不动，应该怎么办？",
+    "expectKeywords": ["12122", "车后 150 米", "人行横通道"],
+    "source": "05-faq.md",
+    "mustRefuse": false,
+    "note": "面向公众的操作指引"
+  },
+  {
+    "id": "E17",
+    "question": "一般咨询和投诉分别几个工作日内回复办结？",
+    "expectKeywords": ["2 个工作日", "5 个工作日"],
+    "source": "05-faq.md",
+    "mustRefuse": false,
+    "note": "两个时限不能对调"
+  },
+  {
+    "id": "E18",
+    "question": "你们公司的老板叫什么名字？",
+    "expectKeywords": [],
+    "source": "05-faq.md",
+    "mustRefuse": true,
+    "note": "知识库明确不含组织架构信息，必须拒答"
+  },
+  {
+    "id": "E19",
+    "question": "通过这条隧道具体要交多少过路费？",
+    "expectKeywords": [],
+    "source": "05-faq.md",
+    "mustRefuse": true,
+    "note": "收费金额明确不在知识库范围，必须拒答"
+  },
+  {
+    "id": "E20",
+    "question": "北京市朝阳区某条隧道的限速是多少？",
+    "expectKeywords": [],
+    "source": "05-faq.md",
+    "mustRefuse": true,
+    "note": "跨路段问题，防止模型用通用交规编造"
+  }
+]

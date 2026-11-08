@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: smart-tunnel-ai
+  ai:
+    openai:
+      # 绝不硬编码；缺失时由 KeyGuard 在启动阶段给出可读错误（fail-fast）
+      api-key: ${ZHIPU_API_KEY:__MISSING_ZHIPU_API_KEY__}
+      # 智谱 OpenAI 兼容端点（不带 /v1）
+      base-url: ${ZHIPU_BASE_URL:https://open.bigmodel.cn/api/paas/v4}
+
+      # 关键：Spring AI 1.1.x 默认拼 /v1/chat/completions 与 /v1/embeddings，
+      # 智谱 v4 端点没有 /v1 前缀。不覆盖这两个值会 404，且不会在启动时报错。
+      chat:
+        completions-path: /chat/completions
+        options:
+          model: ${LLM_MODEL:glm-4-plus}
+          temperature: 0.1
+      embedding:
+        embeddings-path: /embeddings
+        options:
+          model: embedding-3
+          dimensions: 1024
+
+  # 关闭 AI 相关的敏感日志，避免把用户问题写进生产日志
+  codec:
+    max-in-memory-size: 2MB
+
+server:
+  port: ${SERVER_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always   # 便于看到 knowledgeBase 的 phase / indexedChunks
+
+app:
+  rag:
+    # 文件名全部使用 ASCII，避免中文 classpath 在打包/跨平台时踩坑
+    knowledge-pattern: classpath*:knowledge/*.md
+    store-path: ./data/vector-store.json
+    state-path: ./data/ingest-state.json
+    chunk-size: 500
+    chunk-overlap: 60
+    top-k: 4
+    similarity-threshold: 0.0
+    max-context-chars: 4000
+
+logging:
+  level:
+    root: INFO
+    com.example.tunnel: DEBUG
+    org.springframework.ai: INFO

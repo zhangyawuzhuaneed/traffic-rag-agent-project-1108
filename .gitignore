@@ -1,0 +1,34 @@
+# ===== 构建产物 =====
+target/
+!.mvn/wrapper/maven-wrapper.jar
+*.class
+*.jar
+!**/src/main/**/*.jar
+
+# ===== 密钥与本地配置（绝不入库）=====
+.env
+.env.local
+*.pem
+*.key
+application-local.yml
+
+# ===== 运行时生成数据 =====
+data/vector-store.json
+data/ingest-state.json
+data/*.log
+logs/
+
+# ===== IDE =====
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# ===== 系统 =====
+.DS_Store
+Thumbs.db
+
+# ===== Agent 会话态 =====
+.workbuddy/
