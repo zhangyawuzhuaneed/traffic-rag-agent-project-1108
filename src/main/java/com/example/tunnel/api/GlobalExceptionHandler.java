@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.Map;
 
@@ -17,6 +18,19 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+
+        // 专门处理404路由不存在
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public ResponseEntity<Void> handleNoHandlerFound(NoHandlerFoundException e) {
+        // 如果是 favicon.ico，直接静默返回404，不打error日志
+        if (e.getRequestURL().endsWith("/favicon.ico")) {
+            return ResponseEntity.notFound().build();
+        }
+        // 其他正常404，走原有逻辑
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+    
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Map<String, Object>> badRequest(IllegalArgumentException e) {

@@ -53,6 +53,15 @@
             <artifactId>spring-ai-starter-model-openai</artifactId>
         </dependency>
 
+
+        <!-- 多格式文档读取：基于 Apache Tika，支持 txt/pdf/word/excel 等解析 -->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-tika-document-reader</artifactId>
+        </dependency>
+
+
+
         <!-- VectorStore 抽象 + SimpleVectorStore 实现。advisors 模块里含 QuestionAnswerAdvisor，
              本项目故意手写检索链路用于教学，但保留该依赖方便读者切换成 Advisor 写法。 -->
         <dependency>
@@ -75,6 +84,9 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+
+
     </dependencies>
 
     <build>

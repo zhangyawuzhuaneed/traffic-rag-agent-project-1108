@@ -71,7 +71,7 @@ public class IncidentAssistant {
                         .advisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
                         .param(ChatMemory.CONVERSATION_ID, conversationId))
                 .call()
-                .content();
+                .content(); 
         return reply == null ? "" : reply.trim();
     }
 
